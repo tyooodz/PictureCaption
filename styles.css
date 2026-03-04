@@ -411,12 +411,26 @@ textarea:focus {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding: 20px 16px;
+    }
+
     :root {
         --padding-size: 16px;
     }
 
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
     .control-panel {
         padding: var(--padding-size);
+        max-height: 60vh;
+    }
+
+    .preview-panel {
+        height: 40vh;
     }
 
     .form-row {
