@@ -217,7 +217,7 @@ class PicCaptionApp {
 
             // 改进：Canvas 高度 = 原图高度 + 字幕总高度（扩展高度）
             // 原因：字幕显示在原图下方，不覆盖原图
-            const subtitleTotalHeight = subtitles.length * params.subtitleHeight + (subtitles.length - 1) * 2;
+            const subtitleTotalHeight = subtitles.length * params.subtitleHeight + (subtitles.length - 1) * 1;
             const newCanvas = document.createElement('canvas');
             newCanvas.width = this.uploadedImage.width;
             newCanvas.height = this.uploadedImage.height + subtitleTotalHeight;
@@ -254,11 +254,12 @@ class PicCaptionApp {
         // 原因：所有字幕行使用相同的背景
         const baseBackgroundY = Math.max(0, this.uploadedImage.height - params.subtitleHeight);
         const originalImageHeight = this.uploadedImage.height;
+        const gapHeight = 1;
 
         subtitles.forEach((subtitle, index) => {
             // 改进：从上往下堆叠字幕（显示在原图下方）
             // 原因：字幕显示在原图下方，不覆盖原图
-            const y = originalImageHeight + index * (params.subtitleHeight + 2);
+            const y = originalImageHeight + index * (params.subtitleHeight + gapHeight);
 
             // 改进：复制基础背景到字幕位置
             // 原因：所有字幕行背景一致
@@ -284,6 +285,13 @@ class PicCaptionApp {
             const textX = ctx.canvas.width / 2;
             const textY = y + params.subtitleHeight / 2;
             ctx.fillText(subtitle.trim(), textX, textY);
+
+            // 改进：绘制字幕间隙（浅灰色）
+            // 原因：使字幕行之间的间隙更明显
+            if (index < subtitles.length - 1) {
+                ctx.fillStyle = '#f0f0f0';  // 非常浅的灰色
+                ctx.fillRect(0, y + params.subtitleHeight, ctx.canvas.width, gapHeight);
+            }
         });
     }
 

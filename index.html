@@ -15,7 +15,9 @@
             <!-- 上传图片 -->
             <div class="section">
                 <h2>上传图片</h2>
-                <button class="btn-select" id="uploadBtn" aria-label="选择图片文件">+ 选择图片</button>
+                <div class="upload-button-wrapper">
+                    <button class="btn-select" id="uploadBtn" aria-label="选择图片文件">+ 选择图片</button>
+                </div>
                 <!-- 改进：添加 aria-hidden 属性，隐藏的 input 不应被屏幕阅读器读取 -->
                 <input type="file" id="fileInput" accept="image/*" style="display: none;" aria-hidden="true">
                 <p class="file-status" id="fileStatus">未选择文件</p>
@@ -84,7 +86,9 @@
             <!-- 操作按钮 -->
             <div class="section button-group">
                 <button class="btn-primary" id="generateBtn">生成字幕图片</button>
-                <button class="btn-secondary" id="saveBtn" disabled>保存图片</button>
+                <button class="btn-download" id="saveBtn" disabled>
+                    <span>⬇</span> 下载图片
+                </button>
             </div>
         </div>
 
